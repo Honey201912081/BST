@@ -1,0 +1,31 @@
+/* Given a binary tree. Check whether it is a BST or not. */
+
+
+void checkbst(Node* root,long long int &i,long long int arr[])
+{
+
+    if(root==NULL)
+        return;
+    checkbst(root->left,i,arr);
+    //cout<<root->data<<" "<<i;
+    arr[i++]=root->data;
+    
+    checkbst(root->right,i,arr);
+    
+    
+}
+bool isBST(Node* root) {
+    // Your code here
+    long long int i=0;
+    long long int arr[100000];
+    checkbst(root,i,arr);
+    i--;
+    
+    for(int k=1;k<=i;k++)
+    {
+        if(arr[k-1]>=arr[k])  // if 111N11N  or 123
+            return 0;
+    }
+    return 1;
+        
+}
