@@ -1,0 +1,60 @@
+Example 1:
+
+Input:
+              5
+           /    \
+         4       6
+        /         \
+       3           7
+                    \
+                     8
+n1 = 7, n2 = 8
+Output: 7
+
+Input:
+     2
+   /   \
+  1     3
+n1 = 1, n2 = 3
+Output: 2
+
+
+=========================================
+Node* LCA(Node *root, int n1, int n2)
+{
+    if(n1>root->data && n2>root->data)
+    {
+        if(root->right!=NULL){
+            LCA(root->right,n1,n2);
+        }
+    }
+    else if(n1<root->data && n2<root->data)
+    {
+        if(root->left!=NULL){
+            LCA(root->left,n1,n2);
+        }
+    }
+    else{
+        return root;
+    }
+}
+===================================================================================
+===========================LCA of binary tree=========================================
+Node* lca(Node* root ,int n1 ,int n2 )
+{
+    if(root==NULL)
+        return NULL;
+    if(root->data==n1 || root->data==n2)
+        return root;
+    Node* l=lca(root->left,n1,n2);
+    Node* r=lca(root->right,n1,n2);
+    if(l!=NULL && r!=NULL)
+        return root;
+    if(l!=NULL)
+        return l;
+    else
+        return r;
+}
+
+
+Time complexcity: O(n)
