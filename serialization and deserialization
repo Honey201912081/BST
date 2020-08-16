@@ -1,0 +1,34 @@
+void serialize(Node *root,vector<int> &A)
+{
+    //Your code here
+    if(root==nullptr)
+    {
+        A.push_back(-1);
+        return;
+    }
+    A.push_back(root->data);
+    serialize(root->left,A);
+    serialize(root->right,A);
+}
+
+/*this function deserializes
+ the serialized vector A*/
+ Node* deserialization(vector<int> &A,int &index)
+ {
+     if(A[index]==-1)
+     {
+         index++;
+         return nullptr;
+     }
+     Node* root=new Node(A[index++]);
+     root->left=deserialization(A,index);
+     root->right=deserialization(A,index);
+     return root;
+ }
+Node * deSerialize(vector<int> &A)
+{
+   //Your code here
+   int index=0;
+   Node* n=deserialization(A,index);
+   return n;
+}
